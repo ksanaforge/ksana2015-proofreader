@@ -7,8 +7,8 @@ var content= written || files[filename];
 
 var {standoffutils,tagutils}=require("ksana-master-format");
 
-var {action,store,getter,registerGetter,unregisterGetter}=require("./model");
-var self={};
+var {action,listen,unlistenAll,getter,registerGetter,unregisterGetter}=require("./model");
+
 var author="";
 
 registerGetter("content",function(){
@@ -23,14 +23,14 @@ registerGetter("author",function(){
 	return author;
 })
 
-store.listen("write",function(){
+listen("write",function(){
 	action("commitTouched",{},function(){
 		localStorage.setItem(filename,JSON.stringify(content));
 		alert("Written to localstorage")
 	});
 });
 
-store.listen("reset",function(){
+listen("reset",function(){
 	content=files[filename];
 	action("content",{text:content.text,tags:content.tags,mode:"",author:""});
 	alert("click Save to permanently lost your changes");
@@ -44,7 +44,7 @@ var buildAnnotation=function(opts,content){
 	return {text,tags};
 }
 
-store.listen("mode",function(opts){
+listen("mode",function(opts){
 	action("commitTouched",{},function(){
 		setTimeout(function(){//return before firing another action
 			if (opts.filename && opts.filename!==filename) {
