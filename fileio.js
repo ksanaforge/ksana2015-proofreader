@@ -15,8 +15,9 @@ var fileio={
 	}
 	,getfile:function(fn,cb){
 		console.log("loading",fn);
+		const bom=new RegExp(String.fromCharCode(0xFEFF),"g");
 		fs.readFile(fn,function(err,data){
-			if (!err) cb(data);
+			if (!err) cb(data.replace(bom,""));
 		});
 	}
 }

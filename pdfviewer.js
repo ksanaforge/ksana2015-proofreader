@@ -23,7 +23,7 @@ var PDFViewer = React.createClass({
 
   	if (!this.props.pdffn) return E("div",{style:{width:"100%"}},"");
   	return E("div",{style:styles.container},
-    	E(PDF,{file:this.props.pdffn, scale:1.4, left:-140,top:-150,
+    	E(PDF,{file:this.props.pdffn, scale:this.props.scale||1.4, left:-140,top:-150,
     	page:parseInt(this.props.page)})
     	);
   },

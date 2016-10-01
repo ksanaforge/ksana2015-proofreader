@@ -113,7 +113,7 @@ var Pdf = React.createClass({
     this.setState({scale});
   }
   ,onWheel:function(e){
-    var m=-(e.deltaY/100);
+    var m=-(e.deltaY/200);
     this.toscale+=m;
     clearTimeout(this.scaletimer);
     this.scaletimer=setTimeout(function(){
