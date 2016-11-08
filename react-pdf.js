@@ -62,6 +62,11 @@ var Pdf = React.createClass({
       this.setState({page: null});
       this.state.pdf.getPage(newProps.page).then(this._onPageComplete);
     }
+    if (newProps.marginLeft!==this.marginLeft || newProps.marginTop!==this.marginTop) {
+      this.marginLeft=newProps.marginLeft||0;
+      this.marginTop=newProps.marginTop||0;
+      this.forceUpdate();
+    }
   },
   render: function() {
     var self = this;
